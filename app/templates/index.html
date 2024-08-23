@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant virtuel TP-Suisse</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Switzerland.svg/2560px-Flag_of_Switzerland.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+<body class="bg-gray-50 h-full flex justify-center items-center">
+    <div class="bg-white shadow-lg rounded-lg w-full max-w-4xl h-full flex flex-col">
+        <div class="p-4 bg-indigo-600 text-white rounded-t-lg flex justify-between items-center">
+            <h1 class="text-lg font-semibold">
+                Assistant virtuel TP-Suisse
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Switzerland.svg/2560px-Flag_of_Switzerland.svg.png" alt="Swiss flag" class="w-4 inline-block">
+            </h1>
+        </div>
+        <div id="chat-box" class="flex flex-col p-4 space-y-4 text-gray-800 overflow-y-auto flex-grow">
+            <div class="message bot">
+                Bonjour, je suis votre assistant virtuel des transports publics Suisse (TP-Suisse). 🚂🚌🚋⛴️ <br>
+                - Pour connaître le nom exact d'un arrêt, veuillez cliquer sur la bulle de chat ci-dessous. 💬 <br>
+                - Pour arrêter/recommencer la conversation, écrivez "STOP" ou rafrachissez la page. 🛑 <br>
+                Où desirez-vous aller ? 🌍
+            </div>
+        </div>
+
+        <div id="spinner" class="flex justify-center items-center mb-2 hidden">
+            <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-500"></div>
+        </div>
+        <div class="p-4 bg-gray-100 rounded-b-lg">
+            <div class="flex">
+                <input id="user-input" type="text" placeholder="Tapez un message..." class="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" disabled>
+                <button id="send-button" onclick="sendMessage()" class="ml-2 bg-indigo-600 text-white rounded-lg px-4 py-2" disabled>
+                    Envoyer
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Chat Bubble -->
+    <div class="chat-bubble" id="chat-bubble" onclick="toggleChat()" title="Ouvrir l'assistant">
+        <span class="chat-bubble-icon">
+            💬
+        </span>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            Trouver le nom d'un arrêt 🚏
+        </div>
+        <div class="chat-body">
+            <input type="text" id="search-input" placeholder="Tapez un nom d'arrêt..." 
+                   class="w-full p-2 border border-gray-300 rounded-lg mb-2" oninput="fetchSuggestions()">
+            <div id="suggestions" class="suggestions-box hidden"></div>
+        </div>
+        <div class="chat-input">
+            <button onclick="toggleChat()" class="bg-red-500 text-white px-4 py-2 rounded">Fermer</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
